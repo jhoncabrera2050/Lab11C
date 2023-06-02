@@ -1,0 +1,136 @@
+<app-navbar></app-navbar>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row m-t-sm">
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-body">
+            <div class="col-md-12 col-sm-12" id="form">
+              <div class="panel panel-filled">
+                <div class="panel-body">
+                  <div class="view-header">
+                    <div class="header-icon">
+                      <i class="pe page-header-icon pe-7s-map"></i>
+                    </div>
+                    <div class="header-title">
+                      <h3>Locales</h3>
+                      <small>Ubicación de Nuestras Tiendas</small>
+                    </div>
+                  </div>
+                  <div class="map">
+                    <google-map
+                      height="50vh"
+                      width="100%"
+                      [options]="mapOptions"
+                      (mapInitialized)="handleMapInitialized($event)"
+                    >
+                    </google-map>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12" id="form">
+              <div class="panel panel-filled">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h5 class="m-t-xs">Ubicación de Nuestros Locales - Lima</h5>
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table id="tableExample1" class="table">
+                      <thead>
+                        <tr>
+                          <th>id</th>
+                          <th>tienda</th>
+                          <th>latitud</th>
+                          <th>longitud</th>
+                          <th>Departamento</th>
+                          <th>Distrito</th>
+                          <th>Cantidad</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let tienda of listTiendas">
+                          <td>{{ tienda._id }}</td>
+                          <td>{{ tienda.tienda }}</td>
+                          <td>{{ tienda.latitud }}</td>
+                          <td>{{ tienda.longitud }}</td>
+                          <td>{{ tienda.departamento }}</td>
+                          <td>{{ tienda.distrito }}</td>
+                          <td>{{ tienda.cantidad }}</td>
+                          <td>
+                            <button class="button danger" (click)="verTiendaEnMapa(tienda)">Ver</button>
+                            <button class="button danger" (click)="deleteTienda(tienda._id)">Eliminar</button>
+                            <button class="button" (click)="selectTienda(tienda)">Editar</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <h2>Agregar Tienda</h2>
+                  <form (ngSubmit)="createTienda()">
+                    <div>
+                      <label for="name">Tienda:</label>
+                      <input class="input-field" type="text" id="name" name="name" [(ngModel)]="newTienda.tienda" required>
+                    </div>
+                    <div>
+                      <label for="latitude">Latitud:</label>
+                      <input class="input-field" type="text" id="latitude" name="latitude" [(ngModel)]="newTienda.latitud" required>
+                    </div>
+                    <div>
+                      <label for="longitude">Longitud:</label>
+                      <input class="input-field" type="text" id="longitude" name="longitude" [(ngModel)]="newTienda.longitud" required>
+                    </div>
+                    <div>
+                      <label for="department">Departamento:</label>
+                      <input class="input-field" type="text" id="department" name="department" [(ngModel)]="newTienda.departamento" required>
+                    </div>
+                    <div>
+                      <label for="district">Distrito:</label>
+                      <input class="input-field" type="text" id="district" name="district" [(ngModel)]="newTienda.distrito" required>
+                    </div>
+                    <div>
+                      <label for="quantity">Cantidad:</label>
+                      <input class="input-field" type="text" id="quantity" name="quantity" [(ngModel)]="newTienda.cantidad" required>
+                    </div>
+                    <button type="submit">Agregar</button>
+                  </form>
+                  <h2>Actualizar Tienda</h2>
+                  <form (ngSubmit)="updateTienda()">
+                    <div>
+                      <label for="updateName">Tienda:</label>
+                      <input class="input-field" type="text" id="updateName" name="updateName" [(ngModel)]="selectedTienda.tienda" required>
+                    </div>
+                    <div>
+                      <label for="updateDepartment">Departamento:</label>
+                      <input class="input-field" type="text" id="updateDepartment" name="updateDepartment" [(ngModel)]="selectedTienda.departamento" required>
+                    </div>
+                    <div>
+                      <label for="updateDistrict">Distrito:</label>
+                      <input class="input-field" type="text" id="updateDistrict" name="updateDistrict" [(ngModel)]="selectedTienda.distrito" required>
+                    </div>
+                    <div>
+                      <label for="updateLatitude">Latitud:</label>
+                      <input class="input-field" type="number" id="updateLatitude" name="updateLatitude" [(ngModel)]="selectedTienda.latitud" required>
+                    </div>
+                    <div>
+                      <label for="updateLongitude">Longitud:</label>
+                      <input class="input-field" type="number" id="updateLongitude" name="updateLongitude" [(ngModel)]="selectedTienda.longitud" required>
+                    </div>
+                    <div>
+                      <label for="updateQuantity">Cantidad:</label>
+                      <input class="input-field" type="text" id="updateQuantity" name="updateQuantity" [(ngModel)]="selectedTienda.cantidad" required>
+                    </div>
+                    <button type="submit">Actualizar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
